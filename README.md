@@ -1,4 +1,4 @@
-# Pāḷi text transliteration rules.
+# The /conv/ directory: Logic and rules for transliterating Pāḷi texts into Indic scripts in .CSV file format.
 
 ## What
 
