@@ -26,4 +26,4 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 - [thai.csv](https://github.com/paa-li/conv/blob/main/thai.csv) — Thai script
 - [laoo.csv](https://github.com/paa-li/conv/blob/main/laoo.csv) — Lao script; will use ຬ U+0EAC for `ḷa`
 
-Have a better look at these .csv files at the website's [CSV file viewer]([https://paa.li/conv/](https://paa.li/conv/csv.php?id=deva.csv)) where you can easily see the decoded unicode values.
+Have a better look at these .csv files at the website's [CSV file viewer](https://paa.li/conv/csv.php?id=deva.csv) where you can easily see the decoded unicode values.
