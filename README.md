@@ -12,16 +12,16 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 
 ## List of files
 
-- [deva.csv](blob/main/deva.csv) — Devanagari
-- [sinh.csv](blob/main/sinh.csv) — Sinhalese script
-- [orya.csv](blob/main/sinh.csv) — Odia script
-- [beng.csv](blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such orthography: 1 and 2)
-- [mymr.csv](blob/main/beng.csv) — Mon-Burmese script; the Burmese standard Pāḷi orthography.
-- [khmr.csv](blob/main/khmr.csv) — Khmer script
-- [brah.csv](blob/main/brah.csv) — Brahmi script
-- [gran.csv](blob/main/gran.csv) — Grantha script
+- [deva.csv](https://github.com/paa-li/blob/main/deva.csv) — Devanagari
+- [sinh.csv](https://github.com/paa-li/blob/main/sinh.csv) — Sinhalese script
+- [orya.csv](https://github.com/paa-li/blob/main/sinh.csv) — Odia script
+- [beng.csv](https://github.com/paa-li/blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such orthography: 1 and 2)
+- [mymr.csv](https://github.com/paa-li/blob/main/beng.csv) — Mon-Burmese script; the Burmese standard Pāḷi orthography.
+- [khmr.csv](https://github.com/paa-li/blob/main/khmr.csv) — Khmer script
+- [brah.csv](https://github.com/paa-li/blob/main/brah.csv) — Brahmi script
+- [gran.csv](https://github.com/paa-li/blob/main/gran.csv) — Grantha script
 
 ### In progress:
 
-- [thai.csv](blob/main/thai.csv) — Thai script
-- [laoo.csv](blob/main/laoo.csv) — Lao script; will use ຬ U+0EAC for `ḷa`
+- [thai.csv](https://github.com/paa-li/blob/main/thai.csv) — Thai script
+- [laoo.csv](https://github.com/paa-li/blob/main/laoo.csv) — Lao script; will use ຬ U+0EAC for `ḷa`
