@@ -12,13 +12,16 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 
 ## List of files
 
-deva.csv — Devanagari
-sinh.csv — Sinhalese script
-orya.csv — Odia script
-beng.csv — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such orthography: 1 and 2)
-mymr.csv — Mon-Burmese script; the Burmese standard Pāḷi orthography.
-khmr.csv — Khmer script
-brah.csv — Brahmi script
-gran.csv — Grantha script
-iso.csv — ISO 15919: A romanization standard of Indic languages; the default setting of PaaLi. (The file exists only to serve as a placeholder rule of the website.)
-isom.csv — ISO 15919 but displays the default [niggahīta](https://en.wiktionary.org/wiki/niggahita) `ṁ` as `ṃ`.
+- [deva.csv](blob/main/deva.csv) — Devanagari
+- [sinh.csv](blob/main/sinh.csv) — Sinhalese script
+- [orya.csv](blob/main/sinh.csv) — Odia script
+- [beng.csv](blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such orthography: 1 and 2)
+- [mymr.csv](blob/main/beng.csv) — Mon-Burmese script; the Burmese standard Pāḷi orthography.
+- [khmr.csv](blob/main/khmr.csv) — Khmer script
+- [brah.csv](blob/main/brah.csv) — Brahmi script
+- [gran.csv](blob/main/gran.csv) — Grantha script
+
+### In progress:
+
+- [thai.csv](blob/main/thai.csv) — Thai script
+- [laoo.csv](blob/main/laoo.csv) — Lao script; will use ຬ U+0EAC for `ḷa`
