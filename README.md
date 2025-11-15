@@ -2,7 +2,7 @@
 
 ## What
 
-https://paa.li/conv/ is the directory of .csv files which function as Pāḷi text transliteration rules.
+https://paa.li/conv/ is the directory of these .csv files which function as Pāḷi text transliteration rules.
 
 Some .csv files may contain values for alphabets not used in Pāḷi; such as `ṣ`, `r̥` etc.
 
