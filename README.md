@@ -15,7 +15,7 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 - [deva.csv](https://github.com/paa-li/conv/blob/main/deva.csv) — Devanagari
 - [sinh.csv](https://github.com/paa-li/conv/blob/main/sinh.csv) — Sinhalese script
 - [orya.csv](https://github.com/paa-li/conv/blob/main/sinh.csv) — Odia script
-- [beng.csv](https://github.com/paa-li/conv/blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such orthography: 1 and 2)
+- [beng.csv](https://github.com/paa-li/conv/blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such orthography: [1](https://bn.wikisource.org/wiki/%E0%A6%A8%E0%A6%BF%E0%A6%B0%E0%A7%8D%E0%A6%98%E0%A6%A3%E0%A7%8D%E0%A6%9F:%E0%A6%A7%E0%A6%AE%E0%A7%8D%E0%A6%AE%E0%A6%AA%E0%A6%A6_-_%E0%A6%9A%E0%A6%BE%E0%A6%B0%E0%A7%81%E0%A6%9A%E0%A6%A8%E0%A7%8D%E0%A6%A6%E0%A7%8D%E0%A6%B0_%E0%A6%AC%E0%A6%B8%E0%A7%81_(%E0%A7%A7%E0%A7%AF%E0%A7%A9%E0%A7%AC).pdf) and [2](https://www.youtube.com/watch?v=G3v2RGgR7vU))
 - [mymr.csv](https://github.com/paa-li/conv/blob/main/beng.csv) — Mon-Burmese script; the Burmese standard Pāḷi orthography.
 - [khmr.csv](https://github.com/paa-li/conv/blob/main/khmr.csv) — Khmer script
 - [brah.csv](https://github.com/paa-li/conv/blob/main/brah.csv) — Brahmi script
