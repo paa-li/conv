@@ -15,7 +15,7 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 - [deva.csv](https://github.com/paa-li/conv/blob/main/deva.csv) — Devanagari
 - [sinh.csv](https://github.com/paa-li/conv/blob/main/sinh.csv) — Sinhalese script
 - [orya.csv](https://github.com/paa-li/conv/blob/main/sinh.csv) — Odia script
-- [beng.csv](https://github.com/paa-li/conv/blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such an orthography: [1](https://w.wiki/G6kN) and [2](https://www.youtube.com/watch?v=G3v2RGgR7vU)). It is also worth mentioning that PaaLi uses [Kalpurush](https://github.com/potasiyam/Kalpurush) (many thanks, @potasiyam) as the Bengali font face due to its abundance in conjunct ligatures. Different web fonts tend to behave differently when rendering rare clusters, which is especially the case for Assamese-Bengali script fonts.
+- [beng.csv](https://github.com/paa-li/conv/blob/main/beng.csv) — Assamese-Bengali script; uses ৰ for `ba` and ব for `va`. (Examples of such an orthography: [1](https://w.wiki/G6kN) and [2](https://www.youtube.com/watch?v=G3v2RGgR7vU))
 - [mymr.csv](https://github.com/paa-li/conv/blob/main/beng.csv) — Mon-Burmese script; the Burmese standard Pāḷi orthography.
 - [khmr.csv](https://github.com/paa-li/conv/blob/main/khmr.csv) — Khmer script
 - [brah.csv](https://github.com/paa-li/conv/blob/main/brah.csv) — Brahmi script
