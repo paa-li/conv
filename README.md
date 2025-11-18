@@ -20,9 +20,6 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 - [khmr.csv](https://github.com/paa-li/conv/blob/main/khmr.csv) — Khmer script
 - [brah.csv](https://github.com/paa-li/conv/blob/main/brah.csv) — Brahmi script
 - [gran.csv](https://github.com/paa-li/conv/blob/main/gran.csv) — Grantha script
-
-### In progress:
-
 - [thai.csv](https://github.com/paa-li/conv/blob/main/thai.csv) — Thai script
 - [laoo.csv](https://github.com/paa-li/conv/blob/main/laoo.csv) — Lao script; will use ຬ U+0EAC for `ḷa`
 
