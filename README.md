@@ -12,7 +12,7 @@ Conversion starts from the top row to the bottom row. Once every values of the f
 
 ## List of files
 
-Have a better look at the .csv files [here](view).
+Have a better look at the .csv files [here](https://paa-li.github.io/conv/view).
 
 - [deva.csv](https://github.com/paa-li/conv/blob/main/deva.csv) — Devanagari
 - [sinh.csv](https://github.com/paa-li/conv/blob/main/sinh.csv) — Sinhalese script
