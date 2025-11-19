@@ -90,14 +90,14 @@
 		const csvFiles = [
 			"beng.csv",
 			"brah.csv",
-      "deva.csv",
-      "gran.csv",
-      "khmr.csv",
-      "laoo.csv",
-      "mymr.csv",
-      "orya.csv",
-      "sinh.csv",
-      "thai.csv"
+			"deva.csv",
+			"gran.csv",
+			"khmr.csv",
+			"laoo.csv",
+			"mymr.csv",
+			"orya.csv",
+			"sinh.csv",
+			"thai.csv"
 		];
 
 		const selectEl = document.getElementById("csvSelect");
@@ -221,11 +221,32 @@
 			}
 		}
 
+		function applyHashOnLoad() {
+			const hash = window.location.hash;
+			if (!hash || hash.length < 2) return;
+
+			const fileName = decodeURIComponent(hash.slice(1));
+			if (csvFiles.includes(fileName)) {
+				selectEl.value = fileName;
+				loadCsv(fileName);
+			}
+		}
+
 		selectEl.addEventListener("change", () => {
-			loadCsv(selectEl.value);
+			const fileName = selectEl.value;
+
+			if (fileName) {
+				window.location.hash = encodeURIComponent(fileName);
+			} else {
+				// clear hash if user chooses the empty option
+				history.replaceState(null, "", window.location.pathname);
+			}
+
+			loadCsv(fileName);
 		});
 
 		initSelect();
+		applyHashOnLoad();
 	</script>
 </body>
 </html>
