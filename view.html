@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Unicode CSV Viewer</title>
+	<style>
+		body {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			background:#111;
+			color:#eee;
+			margin:0;
+			padding:1.5rem;
+		}
+
+		h1 {
+			font-size:1.4rem;
+			margin-bottom:0.8rem;
+		}
+
+		.controls {
+			margin-bottom:1rem;
+		}
+
+		select {
+			padding:0.25rem 0.5rem;
+			font-size:0.95rem;
+			background:#222;
+			color:#eee;
+			border:1px solid #555;
+			border-radius:4px;
+		}
+
+		#status {
+			margin-top:0.5rem;
+			font-size:0.85rem;
+			color:#ccc;
+		}
+
+		.table-wrapper {
+			margin-top:1rem;
+			max-width:100%;
+			overflow-x:auto;
+		}
+
+		table {
+			border-collapse:collapse;
+			min-width:600px;
+			width:100%;
+		}
+
+		th, td {
+			border:1px solid #444;
+			padding:0.3rem 0.5rem;
+			font-size:0.9rem;
+			white-space:pre;
+		}
+
+		th {
+			background:#222;
+			position:sticky;
+			top:0;
+		}
+
+		tbody tr:nth-child(even) {
+			background:#1b1b1b;
+		}
+
+		tbody tr:nth-child(odd) {
+			background:#151515;
+		}
+	</style>
+</head>
+<body>
+	<h1>Unicode CSV Viewer</h1>
+
+	<div class="controls">
+		<label for="csvSelect">Choose CSV file: </label>
+		<select id="csvSelect">
+			<option value="">-- Select a CSV file --</option>
+		</select>
+		<div id="status"></div>
+	</div>
+
+	<div id="tableContainer" class="table-wrapper"></div>
+
+	<script>
+		const csvFiles = [
+			"beng.csv",
+			"brah.csv",
+      "deva.csv",
+      "gran.csv",
+      "khmr.csv",
+      "laoo.csv",
+      "mymr.csv",
+      "orya.csv",
+      "sinh.csv",
+      "thai.csv"
+		];
+
+		const selectEl = document.getElementById("csvSelect");
+		const statusEl = document.getElementById("status");
+		const tableContainer = document.getElementById("tableContainer");
+
+		function initSelect() {
+			csvFiles.forEach(name => {
+				const opt = document.createElement("option");
+				opt.value = name;
+				opt.textContent = name;
+				selectEl.appendChild(opt);
+			});
+		}
+
+		function decodeUnicodeEscapes(str) {
+			if (!str) return "";
+			return str.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) =>
+				String.fromCharCode(parseInt(hex, 16))
+			);
+		}
+
+		function parseCsv(text) {
+			const lines = text.split(/\r?\n/);
+			const rows = [];
+			let rowNumber = 1;
+
+			for (const line of lines) {
+				const trimmed = line.trim();
+				if (!trimmed) continue;
+
+				const parts = trimmed.split(",");
+				const col1 = (parts[0] || "").trim();
+				const col2 = (parts[1] || "").trim();
+
+				rows.push({
+					index: rowNumber++,
+					raw1: col1,
+					raw2: col2,
+					decoded1: decodeUnicodeEscapes(col1),
+					decoded2: decodeUnicodeEscapes(col2)
+				});
+			}
+			return rows;
+		}
+
+		function renderTable(rows) {
+			tableContainer.innerHTML = "";
+
+			if (!rows.length) {
+				tableContainer.textContent = "No data.";
+				return;
+			}
+
+			const table = document.createElement("table");
+
+			const thead = document.createElement("thead");
+			const headerRow = document.createElement("tr");
+			const headers = ["#", "Raw col 1", "Raw col 2", "Decoded col 1", "Decoded col 2"];
+
+			headers.forEach(text => {
+				const th = document.createElement("th");
+				th.textContent = text;
+				headerRow.appendChild(th);
+			});
+			thead.appendChild(headerRow);
+			table.appendChild(thead);
+
+			const tbody = document.createElement("tbody");
+			rows.forEach(row => {
+				const tr = document.createElement("tr");
+
+				const tdIndex = document.createElement("td");
+				tdIndex.textContent = row.index;
+				tr.appendChild(tdIndex);
+
+				const tdRaw1 = document.createElement("td");
+				tdRaw1.textContent = row.raw1;
+				tr.appendChild(tdRaw1);
+
+				const tdRaw2 = document.createElement("td");
+				tdRaw2.textContent = row.raw2;
+				tr.appendChild(tdRaw2);
+
+				const tdDec1 = document.createElement("td");
+				tdDec1.textContent = row.decoded1;
+				tr.appendChild(tdDec1);
+
+				const tdDec2 = document.createElement("td");
+				tdDec2.textContent = row.decoded2;
+				tr.appendChild(tdDec2);
+
+				tbody.appendChild(tr);
+			});
+
+			table.appendChild(tbody);
+			tableContainer.appendChild(table);
+		}
+
+		async function loadCsv(fileName) {
+			if (!fileName) {
+				tableContainer.innerHTML = "";
+				statusEl.textContent = "";
+				return;
+			}
+
+			statusEl.textContent = `Loading ${fileName}...`;
+
+			try {
+				const response = await fetch(fileName);
+				if (!response.ok) {
+					throw new Error(`HTTP ${response.status}`);
+				}
+				const text = await response.text();
+				const rows = parseCsv(text);
+				renderTable(rows);
+				statusEl.textContent = `Loaded ${fileName} (${rows.length} rows).`;
+			} catch (err) {
+				tableContainer.innerHTML = "";
+				statusEl.textContent = `Error loading ${fileName}: ${err.message}`;
+			}
+		}
+
+		selectEl.addEventListener("change", () => {
+			loadCsv(selectEl.value);
+		});
+
+		initSelect();
+	</script>
+</body>
+</html>
