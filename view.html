@@ -21,6 +21,13 @@
 			margin-bottom:0.8rem;
 		}
 
+		code {
+			background: #333;
+			padding: 1px 3px;
+			border-radius: 3px;
+			letter-spacing: 0;
+		}
+
 		.controls {
 			margin-bottom:1rem;
 		}
@@ -176,12 +183,18 @@
 				tdIndex.textContent = row.index;
 				tr.appendChild(tdIndex);
 
+				// Raw col 1 with <code>
 				const tdRaw1 = document.createElement("td");
-				tdRaw1.textContent = row.raw1;
+				const code1 = document.createElement("code");
+				code1.textContent = row.raw1;
+				tdRaw1.appendChild(code1);
 				tr.appendChild(tdRaw1);
 
+				// Raw col 2 with <code>
 				const tdRaw2 = document.createElement("td");
-				tdRaw2.textContent = row.raw2;
+				const code2 = document.createElement("code");
+				code2.textContent = row.raw2;
+				tdRaw2.appendChild(code2);
 				tr.appendChild(tdRaw2);
 
 				const tdDec1 = document.createElement("td");
