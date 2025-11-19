@@ -23,4 +23,4 @@ Have a better look at the .csv files [here](https://paa-li.github.io/conv/view).
 - [brah.csv](https://github.com/paa-li/conv/blob/main/brah.csv) — Brahmi script
 - [gran.csv](https://github.com/paa-li/conv/blob/main/gran.csv) — Grantha script
 - [thai.csv](https://github.com/paa-li/conv/blob/main/thai.csv) — Thai script
-- [laoo.csv](https://github.com/paa-li/conv/blob/main/laoo.csv) — Lao script; will use ຬ U+0EAC for `ḷa`
+- [laoo.csv](https://github.com/paa-li/conv/blob/main/laoo.csv) — Lao script; uses ຬ U+0EAC for `ḷa`
