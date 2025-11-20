@@ -48,6 +48,41 @@
 			color:#ccc;
 		}
 
+		.converter {
+			margin-top:1.2rem;
+			display:flex;
+			flex-wrap:wrap;
+			gap:1rem;
+		}
+
+		.converter .panel {
+			flex:1 1 300px;
+			display:flex;
+			flex-direction:column;
+		}
+
+		.converter label {
+			margin-bottom:0.25rem;
+			font-size:0.9rem;
+		}
+
+		textarea {
+			width:100%;
+			min-height:7rem;
+			padding:0.5rem;
+			font-family: Arial, "Noto Sans Thai Looped", "Noto Sans Grantha", "Noto Sans Lao Looped", "Noto Sans Devanagari", "Noto Sans Oriya", "Noto Serif Khmer", "Noto Serif Bengali", "Noto Sans Brahmi", "Noto Sans Sinhala", "Noto Sans Myanmar", sans-serif;
+			font-size:0.9rem;
+			background:#181818;
+			color:#eee;
+			border:1px solid #444;
+			border-radius:4px;
+			resize:vertical;
+		}
+
+		textarea[readonly] {
+			background:#141414;
+		}
+
 		.table-wrapper {
 			margin-top:1rem;
 			max-width:100%;
@@ -114,6 +149,10 @@
 		const selectEl = document.getElementById("csvSelect");
 		const statusEl = document.getElementById("status");
 		const tableContainer = document.getElementById("tableContainer");
+		const inputEl = document.getElementById("inputText");
+		const outputEl = document.getElementById("outputText");
+
+		let currentRules = [];
 
 		function initSelect() {
 			csvFiles.forEach(name => {
@@ -124,36 +163,86 @@
 			});
 		}
 
+		// --- Functions from your conversion logic style ---
+
 		function decodeUnicodeEscapes(str) {
 			if (!str) return "";
-			return str.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) =>
-				String.fromCharCode(parseInt(hex, 16))
-			);
+			return str.replace(/\\u([0-9a-fA-F]{4})/g, function (_m, hex) {
+				return String.fromCharCode(parseInt(hex, 16));
+			});
 		}
 
-		function parseCsv(text) {
+		function cleanCell(cell) {
+			cell = cell.trim();
+			if (
+				(cell.startsWith('"') && cell.endsWith('"')) ||
+				(cell.startsWith("'") && cell.endsWith("'"))
+			) {
+				cell = cell.slice(1, -1);
+			}
+			return cell;
+		}
+
+		// Parse CSV into table rows + conversion rules (top -> bottom)
+		function parseCsvForTableAndRules(text) {
 			const lines = text.split(/\r?\n/);
 			const rows = [];
+			const rules = [];
 			let rowNumber = 1;
 
-			for (const line of lines) {
-				const trimmed = line.trim();
-				if (!trimmed) continue;
+			for (let i = 0; i < lines.length; i++) {
+				let line = lines[i].trim();
+				if (!line || line.startsWith("#")) continue;
 
-				const parts = trimmed.split(",");
-				const col1 = (parts[0] || "").trim();
-				const col2 = (parts[1] || "").trim();
+				const parts = line.split(",");
+				if (parts.length < 2) continue;
 
+				let fromRaw = cleanCell(parts[0]);
+				let toRaw = cleanCell(parts[1]);
+
+				const from = decodeUnicodeEscapes(fromRaw);
+				const to = decodeUnicodeEscapes(toRaw);
+
+				// For conversion
+				if (from !== "") {
+					rules.push([from, to]); // applied top-to-bottom
+				}
+
+				// For table display
 				rows.push({
 					index: rowNumber++,
-					raw1: col1,
-					raw2: col2,
-					decoded1: decodeUnicodeEscapes(col1),
-					decoded2: decodeUnicodeEscapes(col2)
+					raw1: fromRaw,
+					raw2: toRaw,
+					decoded1: from,
+					decoded2: to
 				});
 			}
-			return rows;
+
+			return { rows, rules };
 		}
+
+		// Apply rules sequentially (top -> bottom)
+		function applyRulesToText(text, rules) {
+			let out = text;
+			for (const [from, to] of rules) {
+				if (!from) continue;
+				// plain string replace, all occurrences
+				out = out.split(from).join(to);
+			}
+			return out;
+		}
+
+		function updateOutput() {
+			if (!currentRules || currentRules.length === 0) {
+				outputEl.value = inputEl.value;
+			} else {
+				outputEl.value = applyRulesToText(inputEl.value, currentRules);
+			}
+		}
+
+		inputEl.addEventListener("input", updateOutput);
+
+		// --- Table rendering ---
 
 		function renderTable(rows) {
 			tableContainer.innerHTML = "";
@@ -214,10 +303,14 @@
 			tableContainer.appendChild(table);
 		}
 
+		// --- Loading CSV and hash behavior ---
+
 		async function loadCsv(fileName) {
 			if (!fileName) {
 				tableContainer.innerHTML = "";
 				statusEl.textContent = "";
+				currentRules = [];
+				updateOutput();
 				return;
 			}
 
@@ -229,12 +322,18 @@
 					throw new Error(`HTTP ${response.status}`);
 				}
 				const text = await response.text();
-				const rows = parseCsv(text);
-				renderTable(rows);
-				statusEl.textContent = `Loaded ${fileName} (${rows.length} rows).`;
+				const parsed = parseCsvForTableAndRules(text);
+				currentRules = parsed.rules;
+				renderTable(parsed.rows);
+				statusEl.textContent = `Loaded ${fileName} (${parsed.rows.length} rows).`;
+
+				// Re-run conversion for existing input
+				updateOutput();
 			} catch (err) {
 				tableContainer.innerHTML = "";
 				statusEl.textContent = `Error loading ${fileName}: ${err.message}`;
+				currentRules = [];
+				updateOutput();
 			}
 		}
 
@@ -262,6 +361,7 @@
 			loadCsv(fileName);
 		});
 
+		// Init
 		initSelect();
 		applyHashOnLoad();
 	</script>
