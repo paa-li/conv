@@ -146,6 +146,16 @@
 			<label for="outputText">Output text (converted)</label>
 			<textarea id="outputText" readonly></textarea>
 		</div>
+		<button onclick="addLetter('ā')">ā</button>
+		<button onclick="addLetter('ī')">ī</button>
+		<button onclick="addLetter('ū')">ū</button>
+		<button onclick="addLetter('ṁ')">ṁ</button>
+		<button onclick="addLetter('ṅ')">ṅ</button>
+		<button onclick="addLetter('ñ')">ñ</button>
+		<button onclick="addLetter('ṭ')">ṭ</button>
+		<button onclick="addLetter('ḍ')">ḍ</button>
+		<button onclick="addLetter('ṇ')">ṇ</button>
+		<button onclick="addLetter('ḷ')">ḷ</button>
 	</div>	
 
 	<div id="tableContainer" class="table-wrapper"></div>
@@ -384,6 +394,11 @@
 		// Init
 		initSelect();
 		applyHashOnLoad();
+
+		function addLetter(letter) {
+		  var textArea = document.getElementById("outputText");
+		  textArea.value += letter;
+		}
 	</script>
 </body>
 </html>
