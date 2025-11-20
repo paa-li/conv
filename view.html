@@ -40,6 +40,16 @@
 			margin-bottom:1rem;
 		}
 
+		button {
+			background-color: #777;
+			color: #eee;
+			border: none;
+			padding: 0.5em 0.8em;
+			border-radius: 0.3em;
+			cursor: pointer;
+		    font-size: .9em;
+		}
+
 		select {
 			padding:0.25rem 0.5rem;
 			font-size:0.95rem;
@@ -146,6 +156,8 @@
 			<label for="outputText">Output text (converted)</label>
 			<textarea id="outputText" readonly></textarea>
 		</div>
+	</div>	
+	<div>
 		<button onclick="addLetter('ā')">ā</button>
 		<button onclick="addLetter('ī')">ī</button>
 		<button onclick="addLetter('ū')">ū</button>
@@ -156,8 +168,8 @@
 		<button onclick="addLetter('ḍ')">ḍ</button>
 		<button onclick="addLetter('ṇ')">ṇ</button>
 		<button onclick="addLetter('ḷ')">ḷ</button>
-	</div>	
-
+	</div>
+	
 	<div id="tableContainer" class="table-wrapper"></div>
 
 	<p>To the <a href="https://github.com/paa-li/conv/">Github repo</a></p>
