@@ -2,7 +2,7 @@
 
 ## What
 
-https://paa.li/conv/ is the directory of these .csv files which function as Pāḷi text transliteration rules.
+[https://paa.li/conv/](https://paa.li/conv/) is the directory of these .csv files which function as Pāḷi text transliteration rules.
 
 Some .csv files may contain values for alphabets not used in Pāḷi; such as `ṣ`, `r̥` etc.
 
@@ -23,4 +23,4 @@ Have a better look at the .csv files [here](https://paa-li.github.io/conv/view).
 - [brah.csv](https://github.com/paa-li/conv/blob/main/brah.csv) — Brahmi script
 - [gran.csv](https://github.com/paa-li/conv/blob/main/gran.csv) — Grantha script
 - [thai.csv](https://github.com/paa-li/conv/blob/main/thai.csv) — Thai script
-- [laoo.csv](https://github.com/paa-li/conv/blob/main/laoo.csv) — Lao script; uses ຬ U+0EAC for `ḷa`
+- [laoo.csv](https://github.com/paa-li/conv/blob/main/laoo.csv) — Lao script; uses ຬ `U+0EAC` for `ḷa`
