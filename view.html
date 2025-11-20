@@ -157,7 +157,7 @@
 			<textarea id="outputText" readonly></textarea>
 		</div>
 	</div>	
-	<div>
+	<div style="margin-top: 4px">
 		<button onclick="addLetter('ā')">ā</button>
 		<button onclick="addLetter('ī')">ī</button>
 		<button onclick="addLetter('ū')">ū</button>
@@ -408,7 +408,7 @@
 		applyHashOnLoad();
 
 		function addLetter(letter) {
-		  var textArea = document.getElementById("outputText");
+		  var textArea = document.getElementById("inputText");
 		  textArea.value += letter;
 		}
 	</script>
