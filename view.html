@@ -40,7 +40,7 @@
 			margin-bottom:1rem;
 		}
 
-		button {
+		.btn > button {
 			background-color: #555;
 			color: #eee;
 			border: none;
@@ -49,6 +49,7 @@
 			cursor: pointer;
 		    font-size: 1em;
 			font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+			min-width: 3em;
 		}
 
 		select {
@@ -159,7 +160,7 @@
 			<textarea id="outputText" readonly></textarea>
 		</div>
 	</div>	
-	<div style="margin-top: 4px">
+	<div class="btn" style="margin-top: 4px">
 		<button onclick="addLetter('ā')">ā</button>
 		<button onclick="addLetter('ī')">ī</button>
 		<button onclick="addLetter('ū')">ū</button>
@@ -410,8 +411,9 @@
 		applyHashOnLoad();
 
 		function addLetter(letter) {
-		  var textArea = document.getElementById("inputText");
-		  textArea.value += letter;
+			var textArea = document.getElementById("inputText");
+			textArea.value += letter;
+			updateOutput();
 		}
 	</script>
 </body>
