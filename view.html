@@ -228,6 +228,67 @@
 			return cell;
 		}
 
+		// Build a simple or wildcard rule
+		function buildRule(from, to, lineNumber) {
+			const fromQ = (from.match(/\?/g) || []).length;
+			const toQ = (to.match(/\?/g) || []).length;
+
+			// no ? → simple literal rule
+			if (fromQ === 0 && toQ === 0) {
+				return {
+					type: "simple",
+					from: from,
+					to: to
+				};
+			}
+
+			// mismatch or ? only on one side → error, skip
+			if (fromQ === 0 || fromQ !== toQ) {
+				console.warn(
+					"[conv] Skipping CSV rule with mismatched wildcards on line " +
+						(lineNumber) +
+						":",
+					from,
+					"->",
+					to
+				);
+			}
+
+			// escape regex metacharacters
+			let pattern = from.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+
+			// each "?" in FROM becomes a capturing group that matches any one char except space U+0020
+			let groupIndex = 0;
+			pattern = pattern.replace(/\\\?/g, function () {
+				groupIndex++;
+				return "([^ ])";
+			});
+
+			const regex = new RegExp(pattern, "g");
+
+			// in TO, each "?" becomes $1, $2, ...
+			let replacement = "";
+			let groupCounter = 0;
+			for (let i = 0; i < to.length; i++) {
+				const ch = to[i];
+				if (ch === "?") {
+                    groupCounter++;
+                    replacement += "$" + groupCounter;
+				} else if (ch === "$") {
+					// escape literal $
+					replacement += "$$";
+				} else {
+					replacement += ch;
+				}
+			}
+
+			return {
+				type: "wildcard",
+				regex: regex,
+				replacement: replacement
+			};
+		}
+
 		// Parse CSV into table rows + conversion rules (top -> bottom)
 		function parseCsvForTableAndRules(text) {
 			const lines = text.split(/\r?\n/);
@@ -250,7 +311,10 @@
 
 				// For conversion
 				if (from !== "") {
-					rules.push([from, to]); // applied top-to-bottom
+					const rule = buildRule(from, to, i + 1);
+					if (rule) {
+						rules.push(rule); // applied top-to-bottom
+					}
 				}
 
 				// For table display
@@ -269,10 +333,15 @@
 		// Apply rules sequentially (top -> bottom)
 		function applyRulesToText(text, rules) {
 			let out = text;
-			for (const [from, to] of rules) {
-				if (!from) continue;
-				// plain string replace, all occurrences
-				out = out.split(from).join(to);
+			for (const rule of rules) {
+				if (!rule) continue;
+
+				if (rule.type === "simple") {
+					if (!rule.from) continue;
+					out = out.split(rule.from).join(rule.to);
+				} else if (rule.type === "wildcard") {
+					out = out.replace(rule.regex, rule.replacement);
+				}
 			}
 			return out;
 		}
