@@ -10,7 +10,7 @@ Every values of the inner text of class="pi" elements that belong to the left co
 
 Conversion starts from the top row to the bottom row. Once every values of the first row is replaced, the script moves onto work on the next row.
 
-A question mark (?) is a wildcard symbol can be any single digit character except space. Each side of the values in a single row must have an equal number of question marks.
+A question mark (?) is a wildcard symbol which can be any single digit character except space. Each side of the values in a single row must have an equal number of question marks.
 
 ## List of files
 
